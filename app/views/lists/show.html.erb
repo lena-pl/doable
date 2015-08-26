@@ -1,0 +1,18 @@
+<h1>
+  <%= @list.name %>
+</h1>
+
+<p>
+  By:
+  <%= @user.email %>
+</p>
+
+<h2>To Do:</h2>
+<ul>
+	<% @tasks.each do |task| %>
+		<li><%= link_to task.stub, task %></li>
+	<% end %>
+</ul>
+
+<%= link_to 'Edit', edit_list_path(@list) %> |
+<%= link_to 'Back', lists_path %>
