@@ -1,0 +1,17 @@
+<p>
+  <strong>List:</strong>
+  <%= link_to @list.name, list_path %>
+</p>
+
+<p>
+  <strong>Stub:</strong>
+  <%= @task.stub %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @task.description %>
+</p>
+
+<%= link_to 'Edit', edit_task_path(@task) %> |
+<%= link_to 'Back', tasks_path %>

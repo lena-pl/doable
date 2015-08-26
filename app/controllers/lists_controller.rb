@@ -11,6 +11,7 @@ class ListsController < ApplicationController
   # GET /lists/1.json
   def show
     @user = User.find_by(id: @list.user_id)
+    @tasks = Task.where(list_id: @list.id)
   end
 
   # GET /lists/new
