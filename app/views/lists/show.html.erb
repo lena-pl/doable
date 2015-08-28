@@ -4,7 +4,7 @@
 
 <p>
   By:
-  <%= @user.email %>
+  <%= link_to @user.email, user_path(@user) %>
 </p>
 
 <h2>To Do:</h2>
