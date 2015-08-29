@@ -1,6 +1,8 @@
 <p>
   <strong>List:</strong>
-  <%= link_to @list.name, list_path %>
+  <% unless @task.list_id.blank? %>
+  	<%= link_to @list.name, list_path(@list) %>
+  <% end %>
 </p>
 
 <p>

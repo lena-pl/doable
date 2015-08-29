@@ -1,13 +1,16 @@
-<h1>
+<h1 class="text-center">
   <%= @list.name %>
 </h1>
 
-<p>
+<p class="text-center">
   By:
   <%= link_to @user.email, user_path(@user) %>
 </p>
 
-<h2>To Do:</h2>
+<h3>To Do:</h3>
+<%= link_to new_task_path(:list => @list.id), :class => 'btn btn-default' do %>
+    <i class="glyphicon glyphicon-plus"></i> New Task
+<% end %>
 <ul>
 	<% @tasks.each do |task| %>
 		<li><%= link_to task.stub, task %></li>
