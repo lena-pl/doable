@@ -16,6 +16,8 @@ class ListsController < ApplicationController
 
   # GET /lists/new
   def new
+    before_filter :only_list_owner
+
     @list = List.new
   end
 
@@ -26,6 +28,8 @@ class ListsController < ApplicationController
   # POST /lists
   # POST /lists.json
   def create
+    before_filter :only_list_owner
+
     @list = List.new(list_params)
     @list.user_id = current_user.id
 
@@ -62,6 +66,10 @@ class ListsController < ApplicationController
       format.html { redirect_to lists_url, notice: 'List was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def only_list_owner
+    current_user.id == list.user_id
   end
 
   private
