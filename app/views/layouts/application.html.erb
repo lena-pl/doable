@@ -20,7 +20,11 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <%= link_to "Doable", lists_path, class: "navbar-brand" %>
+        <% if current_user %>
+          <li><%= link_to "Doable", user_path(current_user.id), class: "navbar-brand" %></li>
+        <% else %>
+          <%= link_to "Doable", lists_path, class: "navbar-brand" %>
+        <% end %>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
