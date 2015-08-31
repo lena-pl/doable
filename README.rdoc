@@ -1,3 +1,12 @@
 == README
 
 Doable is a simple "To Do" App I'm building to learn a bit more about Ruby on Rails.
+
+MVP Features:
+- Register as a user and log in
+- Create lists associated to the logged in user
+- Create tasks associated to the logged in user and one of their lists
+- "Complete" tasks on the user's lists
+
+Extra Features:
+- Add other users to lists, so they can add and complete tasks
