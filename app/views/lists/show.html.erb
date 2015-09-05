@@ -9,13 +9,13 @@
 
 <h3>To Do:</h3>
 <% if @list.user_id == current_user.id %>
-	<%= link_to new_task_path(:list => @list.id), :class => 'btn btn-default' do %>
+	<%= link_to new_list_task_path(:list_id => @list.id), :class => 'btn btn-default' do %>
 	    <i class="glyphicon glyphicon-plus"></i> New Task
 	<% end %>
 <% end %>
 <ul>
 	<% @tasks.each do |task| %>
-		<li><%= link_to task.stub, task %></li>
+		<li><%= link_to task.stub, list_task_path(@list, task) %></li>
 	<% end %>
 </ul>
 

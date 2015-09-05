@@ -14,6 +14,7 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/new
+  before_filter :only_list_owner, :only => [:new, :edit, :create, :delete]
   def new
     @task = Task.new
   end
@@ -26,11 +27,11 @@ class TasksController < ApplicationController
   # POST /tasks.json
   def create
 
-    @task = Task.new(task_params.merge(list_id: params[:list]))
+    @task = Task.new(task_params.merge(list_id: params[:list_id]))
 
     respond_to do |format|
       if @task.save
-        format.html { redirect_to @task, notice: 'Task was successfully created.' }
+        format.html { redirect_to [@list, @task], notice: 'Task was successfully created.' }
         format.json { render :show, status: :created, location: @task }
       else
         format.html { render :new }
@@ -44,7 +45,7 @@ class TasksController < ApplicationController
   def update
     respond_to do |format|
       if @task.update(task_params)
-        format.html { redirect_to @task, notice: 'Task was successfully updated.' }
+        format.html { redirect_to list_task_path, notice: 'Task was successfully updated.' }
         format.json { render :show, status: :ok, location: @task }
       else
         format.html { render :edit }
@@ -61,6 +62,11 @@ class TasksController < ApplicationController
       format.html { redirect_to tasks_url, notice: 'Task was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def only_list_owner
+    @list = List.find_by(id: params[:list_id])
+    current_user.id == @list.user_id
   end
 
   private
