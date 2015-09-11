@@ -1,14 +1,14 @@
 <h1>Listing Tasks</h1>
 
-<%= link_to new_task_path, class: "btn btn-default" do %>
+<%= link_to new_list_task_path, class: "btn btn-default" do %>
     <i class="glyphicon glyphicon-plus"></i> New Task
 <% end %>
 
 <% @tasks.each do |task| %>
-    <h4><%= link_to task.stub, task %></h4>
+    <h4><%= link_to task.stub, list_task_path(:id => task.id) %></h4>
     <p><%= task.description %></p>
-    <p><%= link_to 'Edit', edit_task_path(task) %>
-    <%= link_to 'Destroy', task, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+    <p><%= link_to 'Edit', edit_list_task_path[:id => task.id, :list_id => @list.id] %>
+    <%= link_to 'Destroy', @task, method: :delete, data: { confirm: 'Are you sure?' } %></p>
 <% end %>
 
 <br>
