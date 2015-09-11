@@ -1,8 +1,11 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
+  include Sorcery::TestHelpers::Rails::Integration
+  include Sorcery::TestHelpers::Rails::Controller
+
   setup do
-    @user = users(:one)
+    @user = users(:noam)
   end
 
   test "should get index" do
@@ -18,32 +21,36 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should create user" do
     assert_difference('User.count') do
-      post :create, user: { crypted_password: @user.crypted_password, email: @user.email, salt: @user.salt }
+      post :create, :user => {:email => "bla@pitput.com", :password => "gluplup", :password_confirmation => "gluplup"}
     end
 
-    assert_redirected_to user_path(assigns(:user))
+    assert_redirected_to lists_path
   end
 
   test "should show user" do
-    get :show, id: @user
+    login_user
+    get :show, id: @user.id
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @user
+    login_user
+    get :edit, :id => @user.to_param
     assert_response :success
   end
 
   test "should update user" do
-    patch :update, id: @user, user: { crypted_password: @user.crypted_password, email: @user.email, salt: @user.salt }
+    login_user
+    put :update, :id => @user.to_param, :user => @user.attributes
     assert_redirected_to user_path(assigns(:user))
   end
 
   test "should destroy user" do
+    login_user
     assert_difference('User.count', -1) do
-      delete :destroy, id: @user
+      delete :destroy, :id => @user.to_param
     end
 
-    assert_redirected_to users_path
+    assert_redirected_to lists_path
   end
 end

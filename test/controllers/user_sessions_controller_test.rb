@@ -12,6 +12,7 @@ class UserSessionsControllerTest < ActionController::TestCase
   end
 
   test "should get destroy" do
+    login_user
     get :destroy
     assert_response :success
   end

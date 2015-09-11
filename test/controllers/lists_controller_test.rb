@@ -18,7 +18,7 @@ class ListsControllerTest < ActionController::TestCase
 
   test "should create list" do
     assert_difference('List.count') do
-      post :create, list: { name: @list.name, user_id: @list.user_id }
+      post :create, list: { name: @list.name, user_id: users(:one).id }
     end
 
     assert_redirected_to list_path(assigns(:list))
