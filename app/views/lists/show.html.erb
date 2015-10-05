@@ -7,17 +7,23 @@
   <%= link_to @user.email, user_path(@user) %>
 </p>
 
-<h3>To Do:</h3>
-<% if @list.user_id == current_user.id %>
-	<%= link_to new_list_task_path(:list_id => @list.id), :class => 'btn btn-default' do %>
-	    <i class="glyphicon glyphicon-plus"></i> New Task
+<% if @tasks.count > 0 %>
+	<h3>To Do:</h3>
+	<% if @list.user_id == current_user.id %>
+		<%= link_to new_list_task_path(:list_id => @list.id), :class => 'btn btn-default' do %>
+		    <i class="glyphicon glyphicon-plus"></i> New Task
+		<% end %>
 	<% end %>
+	<ul>
+		<% @tasks.each do |task| %>
+			<li><%= link_to task.stub, list_task_path(@list, task) %></li>
+		<% end %>
+	</ul>
+<% else %>
+	<h4 class="text-center user-lists">Sorry, nothing in this list yet!</h4>
 <% end %>
-<ul>
-	<% @tasks.each do |task| %>
-		<li><%= link_to task.stub, list_task_path(@list, task) %></li>
-	<% end %>
-</ul>
 
-<%= link_to 'Edit', edit_list_path(@list) %> |
-<%= link_to 'Back', user_path(@user) %>
+<% if @user.id === current_user.id %>
+	<%= link_to 'Edit', edit_list_path(@list) %> |
+	<%= link_to 'Back', user_path(@user) %>
+<% end %>

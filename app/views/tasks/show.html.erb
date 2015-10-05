@@ -15,5 +15,7 @@
   <%= @task.description %>
 </p>
 
-<%= link_to 'Edit', edit_list_task_path(@list, @task) %> |
-<%= link_to 'Back', list_path(@list) %>
+<% if @list.user_id === current_user.id %>
+	<%= link_to 'Edit', edit_list_task_path(@list, @task) %> |
+	<%= link_to 'Back', list_path(@list) %>
+<% end %>
