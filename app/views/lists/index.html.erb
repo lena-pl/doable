@@ -9,8 +9,10 @@
     <li>
       <h4><%= link_to list.name, list %></h4>
       <p>By: <%= User.find_by(id: list.user_id).email %></p>
-      <p><%= link_to 'Edit', edit_list_path(list) %>
-      <%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <% if list.user_id === current_user.id %>
+      	<p><%= link_to 'Edit', edit_list_path(list) %>
+      	<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <% end %>
     </li>
   </ul>
 <% end %>
