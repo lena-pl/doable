@@ -1,9 +1,18 @@
 <h1 class="text-center"><%= @user.email %></h1>
 
+<%= link_to new_list_path, class: "btn btn-default" do %>
+    <i class="glyphicon glyphicon-plus"></i> New List
+<% end %>
+
 <% if @lists.count > 0 %>
 <ul class="user-lists">
 	<% @lists.each do |list| %>
-		<h4><%= link_to list.name, list %></h4>
+		<li>
+			<h4><%= link_to list.name, list %></h4>
+			<p>By: <%= User.find_by(id: list.user_id).email %></p>
+	      	<p><%= link_to 'Edit', edit_list_path(list) %>
+	      	<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	     </li>
 	<% end %>
 </ul>
 <% else %>
