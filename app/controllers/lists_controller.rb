@@ -28,8 +28,8 @@ class ListsController < ApplicationController
   # POST /lists.json
   def create
 
-    @list = List.new(list_params)
-    @list.user_id = current_user.id
+    @list = List.new(:name => params[:list][:name])
+    @list.users << current_user
 
     respond_to do |format|
       if @list.save
