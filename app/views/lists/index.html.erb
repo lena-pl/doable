@@ -8,10 +8,16 @@
   <ul>
     <li>
       <h4><%= link_to list.name, list %></h4>
-      <p>By: <%= User.find_by(id: list.user_id).email %></p>
-      <% if list.user_id === current_user.id %>
-      	<p><%= link_to 'Edit', edit_list_path(list) %>
-      	<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+      <p>This list belongs to: </p>
+      <% list.users.each do |owner| %>
+      <ul>
+        <li><%= owner.email %></li>
+      </ul>
+
+        <% if owner.id == current_user.id %>
+        	<p><%= link_to 'Edit', edit_list_path(list) %>
+        	<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+        <% end %>
       <% end %>
     </li>
   </ul>
