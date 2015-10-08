@@ -11,7 +11,7 @@
       <p>This list belongs to: </p>
       <% list.users.each do |owner| %>
       <ul>
-        <li><%= owner.email %></li>
+        <li><%= link_to owner.email, user_path(owner) %></li>
       </ul>
 
         <% if owner.id == current_user.id %>
