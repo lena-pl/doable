@@ -8,7 +8,7 @@
   <ul>
     <li>
       <h4><%= link_to list.name, list %></h4>
-      <p>This list belongs to: </p>
+      <p>List owners: </p>
       <% list.users.each do |owner| %>
       <ul>
         <li><%= link_to owner.email, user_path(owner) %></li>

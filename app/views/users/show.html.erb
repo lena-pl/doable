@@ -7,18 +7,24 @@
 <% end %>
 
 <% if @lists.count > 0 %>
-<ul class="user-lists">
+<ol class="user-lists">
 	<% @lists.each do |list| %>
 		<li>
 			<h4><%= link_to list.name, list %></h4>
-			<p>By: <%= User.find_by(id: list.user_id).email %></p>
-			<% if list.user_id === current_user.id %>
-	      		<p><%= link_to 'Edit', edit_list_path(list) %>
-	      		<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
-	      	<% end %>
-	     </li>
-	<% end %>
-</ul>
+			<p>List owners: </p>
+      		<% list.users.each do |owner| %>
+	      		<ul>
+	       			 <li><%= link_to owner.email, user_path(owner) %></li>
+	     		 </ul>
+
+	       		 <% if owner.id == current_user.id %>
+	        		<p><%= link_to 'Edit', edit_list_path(list) %>
+	        		<%= link_to 'Destroy', list, method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	        	 <% end %>
+	       	<% end %>
+   		</li>
+    <% end %>
+  </ol>
 <% else %>
 	<h4 class="text-center user-lists">Sorry, no lists to display!</h4>
 <% end %>
