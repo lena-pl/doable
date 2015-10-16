@@ -66,7 +66,9 @@ class TasksController < ApplicationController
 
   def only_list_owner
     @list = List.find_by(id: params[:list_id])
-    current_user.id == @list.user_id
+    @list.users.each do |owner|
+      current_user.id == owner.id
+    end
   end
 
   private
